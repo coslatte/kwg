@@ -65,8 +65,7 @@ data class WavHeader(
     }
 
     override fun toString(): String {
-        val response: String = """
-WavHeader(
+        return """WavHeader(
     channels=$channels (value = ${channels.value}),
     sampleRate=$sampleRate (${(sampleRate.hz)} Hz),
     bitDepth=$bitDepth (${bitDepth.bits} bits),
@@ -76,8 +75,6 @@ WavHeader(
     dataSize=$dataSize,
     subchunk1Size=$subchunk1Size,
     blockAlign=$blockAlign,
-    chunkSizeBytes=$chunkSizeBytes
-)"""
-        return response
+    chunkSizeBytes=$chunkSizeBytes)"""
     }
 }
