@@ -8,6 +8,10 @@ kotlin so far looks really charming when it matters to low lever coding. despite
 
 just learned the differences between java and kotlin when it comes to _enums_ kind of structure, and it's really cool: we use something called `companion object`'s, and they work like such but in a really different way and with better performance that enums are defined in Java.
 
+the ecosystem of koltin is really cool compared with Java for sure. cant say much more, it's excelent in a way that there are endless chances for good patterns.
+
+implemented the header with some sauce of enums and companion objects and data classes.
+
 ## references
 
 https://en.wikipedia.org/wiki/WAV
