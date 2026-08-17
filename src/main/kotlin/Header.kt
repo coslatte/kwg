@@ -28,10 +28,9 @@ data class WavHeader(
 ) {
     val byteRate: UInt = sampleRate.hz * channels.value.toUInt() * (bitDepth.bits.toUInt() / 8u)
     val dataSize: UInt = (sampleDuration.seconds.toULong() * byteRate.toULong()).toUInt()
-
     val subchunk1Size: UInt = 16u
     val blockAlign: UShort = (channels.value * bitDepth.bits / 8u).toUShort()
-    val chunkSizeBytes: UInt = 32u * dataSize
+    val chunkSizeBytes: UInt = 36u + dataSize
 
     fun toByteArray(): ByteArray {
         val buffer = ByteBuffer.allocate(44).apply {
@@ -56,6 +55,7 @@ data class WavHeader(
             putInt(sampleRate.hz.toInt())
             putInt(byteRate.toInt())
             putShort(blockAlign.toShort())
+            putShort(bitDepth.bits.toShort())
 
             // [data chunk]
             put(DATA)
@@ -75,6 +75,7 @@ data class WavHeader(
     dataSize=$dataSize,
     subchunk1Size=$subchunk1Size,
     blockAlign=$blockAlign,
-    chunkSizeBytes=$chunkSizeBytes)"""
+    chunkSizeBytes=$chunkSizeBytes
+)"""
     }
 }
