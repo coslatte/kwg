@@ -2,7 +2,11 @@ import ChunkID.Companion.DATA
 import ChunkID.Companion.FMT
 import ChunkID.Companion.RIFF
 import ChunkID.Companion.WAVE
-import enums.*
+import enums.format.AudioFormat
+import enums.format.BitDepth
+import enums.format.ChannelCount
+import enums.format.SampleDuration
+import enums.format.SampleRate
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 

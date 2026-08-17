@@ -1,4 +1,4 @@
-package enums
+package enums.format
 
 enum class AudioFormat(val code: UShort) {
     PCM(1u),
