@@ -12,7 +12,7 @@ fun main() {
 }
 
 fun testHeader() {
-    val file = File("test.wav")
+    val file = File("test_header.wav")
 
     val header = WavHeader(
         channels = ChannelCount.MONO,
@@ -28,10 +28,19 @@ fun testHeader() {
 }
 
 fun testEngine() {
-    val file = File("testEngine.wav")
+    val file = File("test_engine.wav")
 
     val engine = Engine()
     val header = WavHeader()
 
-//    engine.writeSample(file, Waveform.SAWTOOTH, header)
+    val frequency = 440.0
+    val volume = 0.5
+
+    engine.writeSample(
+        outputFile = file,
+        waveform = Waveform.SAWTOOTH,
+        header = header,
+        frequencyHz = frequency,
+        volume = volume
+    )
 }

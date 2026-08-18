@@ -25,18 +25,15 @@ class Engine(
         }
     }
 
-    private fun generateSound() {
-
-    }
-
     fun writeSample(
         outputFile: File,
         waveform: Waveform,
         header: WavHeader,
-        totalSamples: Long,
         frequencyHz: Double,
         volume: Double,
     ) {
+        val totalSamples = header.sampleRate.hz.toLong() * header.sampleDuration.seconds
+
         FileOutputStream(outputFile).use { fos ->
             val output = DataOutputStream(fos)
 
