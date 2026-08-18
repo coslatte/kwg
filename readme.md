@@ -12,6 +12,16 @@ the ecosystem of koltin is really cool compared with Java for sure. cant say muc
 
 implemented the header with some sauce of enums and companion objects and data classes.
 
+## 8-18-2026
+
+last 4 days i've been coding without much internet.
+
+did some refactor and built the skeleton and core of what it could be a good app for generating cool defined (or random) samples for my experimental music.
+
+the idea right now is implement various modules or effects (serum inspired idea) and blend them together.
+
+as this tool is a byte render from zero tool, I could use this better crazy stuff. will see.
+
 ## references
 
 https://en.wikipedia.org/wiki/WAV
