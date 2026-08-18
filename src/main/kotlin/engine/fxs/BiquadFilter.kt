@@ -1,4 +1,4 @@
-package engine.filters
+package engine.fxs
 
 import kotlin.math.PI
 import kotlin.math.cos

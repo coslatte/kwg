@@ -28,5 +28,5 @@ enum class Waveform {
     /**
      * Random frequencies using math random module.
      */
-    NOISE
+    WHITE_NOISE
 }

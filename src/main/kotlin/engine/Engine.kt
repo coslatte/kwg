@@ -1,7 +1,8 @@
 package engine
 
 import engine.enums.Waveform
-import engine.filters.BiquadFilter
+import engine.fxs.BiquadFilter
+import engine.fxs.Flanger
 import format.WavHeader
 import format.enums.BitDepth
 import format.enums.ChannelCount
@@ -27,7 +28,7 @@ class Engine(
             Waveform.SQUARE -> if (sin(2.0 * PI * phase) >= 0) 1.0 else -1.0
             Waveform.SAWTOOTH -> 2.0 * (phase - floor(phase + 0.5))
             Waveform.TRIANGLE -> 2.0 * abs(2.0 * (phase - floor(phase + 0.5))) - 1.0
-            Waveform.NOISE -> Random.nextDouble(-1.0, 1.0)
+            Waveform.WHITE_NOISE -> Random.nextDouble(-1.0, 1.0)
         }
     }
 
@@ -37,7 +38,8 @@ class Engine(
         header: WavHeader,
         frequencyHz: Double,
         volume: Double,
-        filter: BiquadFilter? = null
+        filter: BiquadFilter? = null,
+        flanger: Flanger? = null
     ) {
         val totalSamples = header.sampleRate.hz.toLong() * header.sampleDuration.seconds
 
@@ -50,8 +52,8 @@ class Engine(
                 val time = n.toDouble() / sampleRate.hz.toDouble()
                 var rawSample = calculateSample(waveform, frequencyHz, time)
 
-                if (filter != null)
-                    rawSample = filter.process(rawSample)
+                if (flanger != null) rawSample = flanger.process(rawSample)
+                if (filter != null) rawSample = filter.process(rawSample)
 
                 writeChannel(
                     output,

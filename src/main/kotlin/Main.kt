@@ -1,6 +1,7 @@
 import engine.Engine
 import engine.enums.Waveform
-import engine.filters.BiquadFilter
+import engine.fxs.BiquadFilter
+import engine.fxs.Flanger
 import format.WavHeader
 import format.enums.BitDepth
 import format.enums.ChannelCount
@@ -13,6 +14,7 @@ fun main() {
     testHeader()
     testEngine()
     testNoise()
+    testFlanger()
 }
 
 fun testHeader() {
@@ -56,15 +58,37 @@ fun testNoise() {
 
     val lpf = BiquadFilter(
         sampleRate = header.sampleRate.hz,
-        cutoffFreq = 880.0
+        cutoffFreq = 1.550
     )
 
     engine.writeSample(
         outputFile = file,
-        waveform = Waveform.NOISE,
+        waveform = Waveform.WHITE_NOISE,
         header = header,
         frequencyHz = 0.0,
         volume = 0.6,
         filter = lpf
+    )
+}
+
+fun testFlanger() {
+    val file = File("test_flanger.wav")
+    val engine = Engine()
+    val header = WavHeader(sampleDuration = SampleDuration._10SEC)
+
+    val flanger = Flanger(
+        sampleRate = header.sampleRate.hz,
+        rateHz = 0.1,
+        depthMs = 0.5,
+        feedback = 0.1
+    )
+
+    engine.writeSample(
+        outputFile = file,
+        waveform = Waveform.WHITE_NOISE,
+        header = header,
+        frequencyHz = 0.0,
+        volume = 0.6,
+        flanger = flanger
     )
 }
