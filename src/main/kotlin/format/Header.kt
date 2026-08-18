@@ -1,12 +1,14 @@
-import ChunkID.Companion.DATA
-import ChunkID.Companion.FMT
-import ChunkID.Companion.RIFF
-import ChunkID.Companion.WAVE
-import enums.format.AudioFormat
-import enums.format.BitDepth
-import enums.format.ChannelCount
-import enums.format.SampleDuration
-import enums.format.SampleRate
+package format
+
+import format.ChunkID.Companion.DATA
+import format.ChunkID.Companion.FMT
+import format.ChunkID.Companion.RIFF
+import format.ChunkID.Companion.WAVE
+import format.enums.AudioFormat
+import format.enums.BitDepth
+import format.enums.ChannelCount
+import format.enums.SampleDuration
+import format.enums.SampleRate
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
@@ -69,7 +71,7 @@ data class WavHeader(
     }
 
     override fun toString(): String {
-        return """WavHeader(
+        return """format.WavHeader(
     channels=$channels (value = ${channels.value}),
     sampleRate=$sampleRate (${(sampleRate.hz)} Hz),
     bitDepth=$bitDepth (${bitDepth.bits} bits),

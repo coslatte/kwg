@@ -1,8 +1,10 @@
-import enums.engine.Waveform
-import enums.format.BitDepth
-import enums.format.ChannelCount
-import enums.format.SampleDuration
-import enums.format.SampleRate
+import engine.Engine
+import engine.enums.Waveform
+import format.enums.BitDepth
+import format.enums.ChannelCount
+import format.enums.SampleDuration
+import format.enums.SampleRate
+import format.WavHeader
 import java.io.File
 import java.io.FileOutputStream
 

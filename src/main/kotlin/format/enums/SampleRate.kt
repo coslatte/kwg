@@ -1,4 +1,4 @@
-package enums.format
+package format.enums
 
 enum class SampleRate(val hz: UInt) {
     _44100(44100u),

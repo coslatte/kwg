@@ -1,4 +1,4 @@
-package enums.engine
+package engine.enums
 
 enum class Waveform {
     /**

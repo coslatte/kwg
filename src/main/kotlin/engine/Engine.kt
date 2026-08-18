@@ -1,7 +1,10 @@
-import enums.engine.Waveform
-import enums.format.BitDepth
-import enums.format.ChannelCount
-import enums.format.SampleRate
+package engine
+
+import engine.enums.Waveform
+import format.WavHeader
+import format.enums.BitDepth
+import format.enums.ChannelCount
+import format.enums.SampleRate
 import java.io.DataOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -9,6 +12,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.floor
 import kotlin.math.sin
+import kotlin.ranges.until
 
 class Engine(
     private val sampleRate: SampleRate = SampleRate._44100,

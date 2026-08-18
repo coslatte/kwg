@@ -1,6 +1,6 @@
-package enums.format
+package format.enums
 
-import WavHeader
+import format.WavHeader
 
 enum class SampleDuration(val seconds: Long) {
     _1SEC(1L),

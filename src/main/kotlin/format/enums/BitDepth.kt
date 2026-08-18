@@ -1,4 +1,4 @@
-package enums.format
+package format.enums
 
 enum class BitDepth(val bits: UShort) {
     _8(8u),

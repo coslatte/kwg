@@ -1,4 +1,4 @@
-package enums.format
+package format.enums
 
 enum class ChannelCount(val value: UShort) {
     MONO(1u),
