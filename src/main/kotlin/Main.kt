@@ -1,16 +1,18 @@
 import engine.Engine
 import engine.enums.Waveform
+import engine.filters.BiquadFilter
+import format.WavHeader
 import format.enums.BitDepth
 import format.enums.ChannelCount
 import format.enums.SampleDuration
 import format.enums.SampleRate
-import format.WavHeader
 import java.io.File
 import java.io.FileOutputStream
 
 fun main() {
     testHeader()
     testEngine()
+    testNoise()
 }
 
 fun testHeader() {
@@ -44,5 +46,25 @@ fun testEngine() {
         header = header,
         frequencyHz = frequency,
         volume = volume
+    )
+}
+
+fun testNoise() {
+    val file = File("test_noise.wav")
+    val engine = Engine()
+    val header = WavHeader()
+
+    val lpf = BiquadFilter(
+        sampleRate = header.sampleRate.hz,
+        cutoffFreq = 880.0
+    )
+
+    engine.writeSample(
+        outputFile = file,
+        waveform = Waveform.NOISE,
+        header = header,
+        frequencyHz = 0.0,
+        volume = 0.6,
+        filter = lpf
     )
 }

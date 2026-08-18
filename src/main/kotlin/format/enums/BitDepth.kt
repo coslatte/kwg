@@ -6,8 +6,6 @@ enum class BitDepth(val bits: UShort) {
     _24(24u),
     _32(32u);
 
-    val bytes: Int get() = bits.toInt()
-
     companion object {
         fun from(bits: Number): BitDepth = when (bits.toInt()) {
             8 -> _8

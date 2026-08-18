@@ -1,6 +1,7 @@
 package engine
 
 import engine.enums.Waveform
+import engine.filters.BiquadFilter
 import format.WavHeader
 import format.enums.BitDepth
 import format.enums.ChannelCount
@@ -12,7 +13,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.floor
 import kotlin.math.sin
-import kotlin.ranges.until
+import kotlin.random.Random
 
 class Engine(
     private val sampleRate: SampleRate = SampleRate._44100,
@@ -26,6 +27,7 @@ class Engine(
             Waveform.SQUARE -> if (sin(2.0 * PI * phase) >= 0) 1.0 else -1.0
             Waveform.SAWTOOTH -> 2.0 * (phase - floor(phase + 0.5))
             Waveform.TRIANGLE -> 2.0 * abs(2.0 * (phase - floor(phase + 0.5))) - 1.0
+            Waveform.NOISE -> Random.nextDouble(-1.0, 1.0)
         }
     }
 
@@ -35,6 +37,7 @@ class Engine(
         header: WavHeader,
         frequencyHz: Double,
         volume: Double,
+        filter: BiquadFilter? = null
     ) {
         val totalSamples = header.sampleRate.hz.toLong() * header.sampleDuration.seconds
 
@@ -45,7 +48,10 @@ class Engine(
 
             for (n in 0 until totalSamples) {
                 val time = n.toDouble() / sampleRate.hz.toDouble()
-                val rawSample = calculateSample(waveform, frequencyHz, time)
+                var rawSample = calculateSample(waveform, frequencyHz, time)
+
+                if (filter != null)
+                    rawSample = filter.process(rawSample)
 
                 writeChannel(
                     output,
