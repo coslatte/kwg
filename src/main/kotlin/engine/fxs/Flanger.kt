@@ -7,9 +7,9 @@ import kotlin.math.sin
 class Flanger(
     sampleRate: UInt,
     rateHz: Double = 0.5,
-    depthMs: Double = 3.0,
-    feedback: Double = 0.6,
-    mix: Double = 0.5
+    var depthMs: Double = 3.0,
+    var feedback: Double = 0.6,
+    var mix: Double = 0.5
 ) {
     private val srDouble = sampleRate.toDouble()
 
@@ -24,10 +24,6 @@ class Flanger(
             field = value
             lfoPhaseInc = 2.0 * PI * value / srDouble
         }
-
-    var depthMs = depthMs
-    var feedback = feedback
-    var mix = mix
 
     private var lfoPhaseInc = 2.0 * PI * rateHz / srDouble
 

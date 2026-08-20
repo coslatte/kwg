@@ -86,7 +86,7 @@ class Engine {
     }
 
     private fun writeChannel(fileReference: DataOutputStream, value: Int, header: WavHeader) {
-        for (ch in 0 until header.channels.value.toInt()) {
+        repeat(header.channels.value.toInt()) {
             when (header.bitDepth) {
                 BitDepth._8 -> fileReference.writeByte(value and 0xFF)
                 BitDepth._16 -> {

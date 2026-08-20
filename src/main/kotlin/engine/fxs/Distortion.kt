@@ -3,16 +3,11 @@ package engine.fxs
 import kotlin.math.tanh
 
 class Distortion(
-    drive: Double = 1.0,
-    saturation: Double = 0.7,
-    mix: Double = 1.0,
-    oversample: Int = 4
+    var drive: Double = 1.0,
+    var saturation: Double = 0.7,
+    var mix: Double = 1.0,
+    var oversample: Int = 4
 ) {
-    var drive = drive
-    var saturation = saturation
-    var mix = mix
-    var oversample = oversample
-
     private var previousInput = 0.0
 
     fun process(input: Double): Double {

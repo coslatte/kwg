@@ -12,11 +12,9 @@ package engine.fxs
 class SpecialFx(
     val flanger: Flanger,
     val distortion: Distortion,
-    feedback: Double = 0.4,
-    mix: Double = 1.0
+    var feedback: Double = 0.4,
+    var mix: Double = 1.0
 ) {
-    var feedback = feedback
-    var mix = mix
 
     private var feedbackSample = 0.0
 
