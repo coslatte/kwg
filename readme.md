@@ -28,6 +28,10 @@ as this is a personal stuff and a hobbies, now that I have the basics of Kotlin,
 
 later on I will add a UI.
 
+## 8-20-2026
+
+refactoring the directories. thinking on migrating UI from java swing (which the agents did by default) to _Compose Multiplatform_.
+
 ## references
 
 https://en.wikipedia.org/wiki/WAV
