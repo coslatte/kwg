@@ -8,15 +8,16 @@ I want to build a files generator from scratch using Kotlin. Learning through th
     <img src="assets/screenshot1.png" alt="screenshot1" style="width: 100%; height: auto; border-radius: 8px;" />
 </div>
 
-## 8-14-2026
+## 8-20-2026
 
-kotlin so far looks really charming when it matters to low lever coding. despite java morbose sintaxis, this stuffs lets you be the same time verbose and clear, with quite cool modern syntax sauce and structures.
+refactoring the directories. thinking on migrating UI from java swing (which the agents did by default) to _Compose Multiplatform_.
 
-just learned the differences between java and kotlin when it comes to _enums_ kind of structure, and it's really cool: we use something called `companion object`'s, and they work like such but in a really different way and with better performance that enums are defined in Java.
+## 8-19-2026
 
-the ecosystem of kotlin is really cool compared with Java for sure. cant say much more, it's excellent in a way that there are endless chances for good patterns.
+as this is a personal stuff and a hobbies, now that I have the basics of Kotlin, I will develop the app using some vibecoded parts. This is a vibe, but I will check results too, avoiding misleading results and not breaking apart any stuff. Main target now is not the *engine* itself, more like I want to build sounds.
 
-implemented the header with some sauce of enums and companion objects and data classes.
+later on I will add a UI.
+
 
 ## 8-18-2026
 
@@ -28,15 +29,15 @@ the idea right now is implement various modules or effects (serum inspired idea)
 
 as this tool is a byte render from zero tool, I could use this better crazy stuff. will see.
 
-## 8-19-2026
+## 8-14-2026
 
-as this is a personal stuff and a hobbies, now that I have the basics of Kotlin, I will develop the app using some vibecoded parts. This is a vibe, but I will check results too, avoiding misleading results and not breaking apart any stuff. Main target now is not the *engine* itself, more like I want to build sounds.
+kotlin so far looks really charming when it matters to low lever coding. despite java morbose sintaxis, this stuffs lets you be the same time verbose and clear, with quite cool modern syntax sauce and structures.
 
-later on I will add a UI.
+just learned the differences between java and kotlin when it comes to _enums_ kind of structure, and it's really cool: we use something called `companion object`'s, and they work like such but in a really different way and with better performance that enums are defined in Java.
 
-## 8-20-2026
+the ecosystem of kotlin is really cool compared with Java for sure. cant say much more, it's excellent in a way that there are endless chances for good patterns.
 
-refactoring the directories. thinking on migrating UI from java swing (which the agents did by default) to _Compose Multiplatform_.
+implemented the header with some sauce of enums and companion objects and data classes.
 
 ## references
 
