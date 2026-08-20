@@ -9,20 +9,38 @@ class BiquadFilter(
     cutoffFreq: Double,
     q: Double = 0.7071
 ) {
+    private val sr = sampleRate.toDouble()
+
     private var x1 = 0.0
     private var x2 = 0.0
     private var y1 = 0.0
     private var y2 = 0.0
 
-    private val a0: Double
-    private val a1: Double
-    private val a2: Double
-    private val b0: Double
-    private val b1: Double
-    private val b2: Double
+    var cutoffFreq = cutoffFreq
+        set(value) {
+            field = value
+            recomputeCoefficients()
+        }
+
+    var q = q
+        set(value) {
+            field = value
+            recomputeCoefficients()
+        }
+
+    private var a0 = 1.0
+    private var a1 = 0.0
+    private var a2 = 0.0
+    private var b0 = 0.0
+    private var b1 = 0.0
+    private var b2 = 0.0
 
     init {
-        val w0 = 2.0 * PI * cutoffFreq / sampleRate.toDouble()
+        recomputeCoefficients()
+    }
+
+    private fun recomputeCoefficients() {
+        val w0 = 2.0 * PI * cutoffFreq / sr
         val alpha = sin(w0) / (2.0 * q)
         val cosW0 = cos(w0)
 

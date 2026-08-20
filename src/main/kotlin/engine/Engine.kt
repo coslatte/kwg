@@ -41,6 +41,29 @@ class Engine {
         specialFx: SpecialFx? = null,
         clipper: Clipper? = null
     ) {
+        renderToFile(
+            outputFile,
+            waveform,
+            header,
+            frequencyHz,
+            SignalChain(
+                volume = volume,
+                specialFx = specialFx,
+                flanger = flanger,
+                distortion = distortion,
+                filter = filter,
+                clipper = clipper
+            )
+        )
+    }
+
+    fun renderToFile(
+        outputFile: File,
+        waveform: Waveform,
+        header: WavHeader,
+        frequencyHz: Double,
+        chain: SignalChain
+    ) {
         val totalSamples = header.sampleRate.hz.toLong() * header.sampleDuration.seconds
 
         FileOutputStream(outputFile).use { fos ->
@@ -50,16 +73,12 @@ class Engine {
 
             for (n in 0 until totalSamples) {
                 val time = n.toDouble() / header.sampleRate.hz.toDouble()
-                var rawSample = calculateSample(waveform, frequencyHz, time)
-
-                if (specialFx != null) rawSample = specialFx.process(rawSample)
-                if (flanger != null) rawSample = flanger.process(rawSample)
-                if (distortion != null) rawSample = distortion.process(rawSample)
-                if (filter != null) rawSample = filter.process(rawSample)
+                val rawSample = calculateSample(waveform, frequencyHz, time)
+                val processed = chain.process(rawSample)
 
                 writeChannel(
                     output,
-                    scaleValue(rawSample, volume, clipper, header.bitDepth),
+                    scaleValue(processed, header.bitDepth),
                     header
                 )
             }
@@ -90,21 +109,17 @@ class Engine {
     }
 
     /**
-     * Pre-master stage: applies volume, then the clipper caps the signal
-     * so nothing goes beyond 0 dB before scaling to the target bit depth.
+     * Scales a final (volume/clipper processed) sample into the target bit depth range.
      */
-    private fun scaleValue(rawSample: Double, volume: Double, clipper: Clipper?, bitDepth: BitDepth): Int {
-        val scaled = rawSample * volume
-        val limited = if (clipper != null) clipper.process(scaled) else scaled
-
+    private fun scaleValue(sample: Double, bitDepth: BitDepth): Int {
         return when (bitDepth) {
-            BitDepth._8 -> (limited * 127.0 + 128.0).toInt().coerceIn(0, 255)
-            BitDepth._16 -> (limited * Short.MAX_VALUE).toInt().coerceIn(
+            BitDepth._8 -> (sample * 127.0 + 128.0).toInt().coerceIn(0, 255)
+            BitDepth._16 -> (sample * Short.MAX_VALUE).toInt().coerceIn(
                 Short.MIN_VALUE.toInt(),
                 Short.MAX_VALUE.toInt()
             )
-            BitDepth._24 -> (limited * 8388607.0).toInt().coerceIn(-8388608, 8388607)
-            BitDepth._32 -> (limited * 2147483647.0).toLong().coerceIn(
+            BitDepth._24 -> (sample * 8388607.0).toInt().coerceIn(-8388608, 8388607)
+            BitDepth._32 -> (sample * 2147483647.0).toLong().coerceIn(
                 Int.MIN_VALUE.toLong(),
                 Int.MAX_VALUE.toLong()
             ).toInt()
