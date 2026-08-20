@@ -1,5 +1,3 @@
-package test
-
 import engine.Patch
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -8,6 +6,7 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import kotlin.math.sin
 
 /**
  * The patch is the bridge between the two use cases: the sliders mutate live
@@ -127,7 +126,7 @@ class PatchTest {
         val snapshot = patch.snapshotChain(8000u)
 
         for (step in 0..500) {
-            val output = snapshot.process(Math.sin(step / 20.0) * 0.8)
+            val output = snapshot.process(sin(step / 20.0) * 0.8)
             assertTrue(output.isFinite(), "sample $step came out as $output")
         }
     }

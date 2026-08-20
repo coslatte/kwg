@@ -1,5 +1,3 @@
-package test
-
 import engine.fxs.BiquadFilter
 import engine.fxs.Clipper
 import engine.fxs.Distortion

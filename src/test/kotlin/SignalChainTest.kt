@@ -1,11 +1,11 @@
-package test
-
 import engine.SignalChain
 import engine.fxs.Clipper
 import engine.fxs.Distortion
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import kotlin.math.abs
+import kotlin.math.pow
 
 /**
  * The chain is the contract shared by file rendering and live playback, so the
@@ -40,13 +40,13 @@ class SignalChainTest {
             clipper = Clipper(ceilingDb = -3.0, softness = 0.5)
         )
 
-        val ceiling = Math.pow(10.0, -3.0 / 20.0)
+        val ceiling = 10.0.pow(-3.0 / 20.0)
 
         for (step in 0..200) {
             val input = -1.0 + step / 100.0
             val output = chain.process(input)
             assertTrue(
-                Math.abs(output) <= ceiling + 1e-9,
+                abs(output) <= ceiling + 1e-9,
                 "input $input produced $output, over the ${"%.3f".format(ceiling)} ceiling"
             )
         }
@@ -74,7 +74,7 @@ class SignalChainTest {
         assertEquals(1.0, chain.process(2.0), 1e-9)
 
         chain.clipper!!.ceilingDb = -6.0
-        assertEquals(Math.pow(10.0, -6.0 / 20.0), chain.process(2.0), 1e-9)
+        assertEquals(10.0.pow(-6.0 / 20.0), chain.process(2.0), 1e-9)
 
         chain.volume = 0.25
         assertEquals(0.25, chain.process(1.0), 1e-9)

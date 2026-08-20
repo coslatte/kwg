@@ -1,13 +1,9 @@
-package test
-
 import engine.Engine
 import engine.enums.Waveform
 import engine.export.ExportFormat
 import engine.export.Exporter
 import engine.export.QualityPreset
 import engine.fxs.Distortion
-import engine.fxs.Flanger
-import engine.fxs.SpecialFx
 import format.enums.SampleDuration
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -22,7 +18,6 @@ class ExportTest {
         val file = File(tempDir, "export_lofi.wav")
         val exporter = Exporter()
         val engine = Engine()
-
         val distortion = Distortion(
             drive = 8.0,
             saturation = 0.7,

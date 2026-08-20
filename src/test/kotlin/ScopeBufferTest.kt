@@ -1,5 +1,3 @@
-package test
-
 import engine.audio.ScopeBuffer
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertEquals
